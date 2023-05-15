@@ -37,6 +37,17 @@ let jokes = [
 // serve back static files
 app.use(express.static('server/public'));
 
+//post my new joke from the client and add it to my array of jokes
+app.post('/jokes', function(req, res){
+  jokes.push(req.body);
+  res.sendStatus(200);
+});
+//send updated jokes array to the client
+app.get('/jokes', function(req, res){
+  console.log('heres our updated joke array:', jokes );
+  res.send(jokes);
+})
+
 app.listen(PORT, () => {
   console.log('server running on: ', PORT);
 }); // end spin up server
